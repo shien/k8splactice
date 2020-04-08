@@ -1,0 +1,45 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: example-ingress
+  annotations:
+    ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /ping
+        backend:
+          serviceName: http-ping
+          servicePort: 8080
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: http-ping
+spec:
+  selector:
+    app: http-ping
+  ports:
+  # Default port used by the image
+  - port: 8080
+---
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: http-ping-deployment
+spec:
+  selector:
+    matchLabels:
+      app: http-ping
+  replicas: 2 # tells deployment to run 2 pods matching the template
+  template:
+    metadata:
+      labels:
+        app: http-ping
+    spec:
+      containers:
+      - name: http-ping
+        image: shien07/http-ping:latest
+        ports:
+        - containerPort: 8080
