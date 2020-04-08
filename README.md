@@ -17,7 +17,7 @@ check connect to service
 ```
 $ kubectl exec client-app-6685454f4d-b8q4p -it /bin/sh
 # apk add curl
-# curl localhost:8080/ping
+# curl http-ping:8080/ping
 pong#
 ```
 
