@@ -1,12 +1,11 @@
-
-build
+### make Docker image
+build and check
 ```
 $ docker build --no-cache  --rm -t shien07/http-ping:latest .
 $ docker run -d -p 8080:8080 shien07/http-ping:latest
 ```
 
-push docker image
-
+Push Docker image to Docker resistory
 ```
 $ docker login
 $ docker push shien07/http-ping:latest
