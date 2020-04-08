@@ -1,0 +1,19 @@
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: client-app
+spec:
+  selector:
+    matchLabels:
+      app: client-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: client-app
+    spec:
+      containers:
+      - name: client-app
+        image: alpine:latest
+        command: ["/bin/sleep"]
+        args: ["10000"]
